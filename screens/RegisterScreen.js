@@ -21,11 +21,11 @@ const RegisterScreen = () => {
   }, [navigator])
 
   const registerIn = () => {
-    console.log({ name, email, password, imageURL });
     auth.createUserWithEmailAndPassword(email, password)
       .then(authUser => {
-        authUser.user.update({
+        authUser.user.updateProfile({
           displayName: name,
+          // http://surl.li/buhxf
           photoURL: imageURL || 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/1200px-Missing_avatar.svg.png'
         })
       })
