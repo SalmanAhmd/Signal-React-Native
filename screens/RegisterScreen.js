@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
 import { StatusBar } from 'expo-status-bar'
 import { useLayoutEffect, useState } from 'react'
-import { View, Text, KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Button, Input, Image } from 'react-native-elements'
+import { View, Text, KeyboardAvoidingView, StyleSheet, Platform } from 'react-native'
+import { Button, Input } from 'react-native-elements'
 import { auth } from '../firebase'
 
 const RegisterScreen = () => {
