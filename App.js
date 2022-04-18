@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 const globalScreenOptions = {
   headerStyle: { backgroundColor: '#2c6bed' },
@@ -19,6 +20,11 @@ export default function App() {
           <Stack.Screen
             name='Login'
             component={LoginScreen}
+          />
+
+          <Stack.Screen
+            name='Register'
+            component={RegisterScreen}
           />
         </Stack.Navigator>
       </SafeAreaProvider>
