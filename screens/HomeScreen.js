@@ -1,20 +1,33 @@
 import { useNavigation } from '@react-navigation/native'
-import { useLayoutEffect } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Avatar } from 'react-native-elements'
 import CustomListItem from '../components/CustomListItem'
-import { auth } from '../firebase'
+import { auth, db } from '../firebase'
 import { AntDesign, SimpleLineIcons } from '@expo/vector-icons'
+import { StatusBar } from 'expo-status-bar'
 
 const HomeScreen = () => {
 
   const navigator = useNavigation()
+  const [chats, setChats] = useState([])
 
   const signOutUser = () => {
     auth.signOut().then(() => {
       navigator.replace('Login')
     })
   }
+
+  useEffect(() => {
+    const unsubscribe = db.collection('chats')
+      .onSnapshot(snapshot => setChats(snapshot.docs
+        .map(doc => ({
+          id: doc.id,
+          data: doc.data()
+        }))))
+
+    return unsubscribe
+  }, [])
 
   useLayoutEffect(() => {
     navigator.setOptions({
@@ -36,12 +49,17 @@ const HomeScreen = () => {
         </TouchableOpacity>
       </View>)
     })
-  }), [navigator]
+  }), [navigator, auth]
+
+  const enterChat = (id, chatName) => navigator.navigate('Chat', { id, chatName })
 
   return (
     <SafeAreaView>
-      <ScrollView>
-        <CustomListItem />
+      <StatusBar style='dark' />
+      <ScrollView style={styles.container}>
+        {chats.map(({ id, data: { chatName } }) => (
+          <CustomListItem key={id} id={id} chatName={chatName} enterChat={enterChat} />
+        ))}
       </ScrollView>
     </SafeAreaView>
   )
@@ -56,5 +74,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: 60,
     marginRight: 0
+  },
+  container: {
+    height: '100%'
   }
 })

@@ -5,6 +5,7 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import HomeScreen from './screens/HomeScreen';
 import AddChatScreen from './screens/AddChatScreen';
+import ChatScreen from './screens/ChatScreen';
 
 const globalScreenOptions = {
   headerStyle: { backgroundColor: '#2c6bed' },
@@ -40,6 +41,11 @@ export default function App() {
           <Stack.Screen
             name='AddChat'
             component={AddChatScreen}
+          />
+
+          <Stack.Screen
+            name='Chat'
+            component={ChatScreen}
           />
         </Stack.Navigator>
       </SafeAreaProvider>
