@@ -1,4 +1,3 @@
-// import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -21,13 +20,6 @@ export default function App() {
             name='Login'
             component={LoginScreen}
           />
-          {/* <Stack.Screen
-            name='MapScreen'
-            component={MapScreen}
-            options={{
-              headerShown: false,
-
-            }} /> */}
         </Stack.Navigator>
       </SafeAreaProvider>
     </NavigationContainer>
