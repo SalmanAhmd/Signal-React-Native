@@ -49,7 +49,7 @@ const HomeScreen = () => {
         </TouchableOpacity>
       </View>)
     })
-  }), [navigator]
+  }), [navigator, auth]
 
   const enterChat = (id, chatName) => navigator.navigate('Chat', { id, chatName })
 
