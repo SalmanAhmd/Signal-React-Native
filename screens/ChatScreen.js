@@ -11,7 +11,7 @@ const ChatScreen = ({ navigation, route }) => {
 
   const [input, setInput] = useState('')
   const [message, setMessage] = useState([])
-
+  const userEmail = auth.currentUser.email
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -20,7 +20,7 @@ const ChatScreen = ({ navigation, route }) => {
       headerTitleAlign: 'left',
       headerTitle: () => (
         <View style={styles.headerTitle}>
-          <Avatar rounded source={{ uri: '' }} />
+          <Avatar rounded source={{ uri: message.find(({ data }) => data.email !== userEmail)?.data.photoURL || 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png' }} />
           <Text style={styles.headerText}>{route.params.chatName}</Text>
         </View>
       ),
@@ -40,7 +40,7 @@ const ChatScreen = ({ navigation, route }) => {
         </View>
       )
     })
-  }, [navigator])
+  }, [navigator, message])
 
   useLayoutEffect(() => {
     const unsubscribe = db.collection('chats')
